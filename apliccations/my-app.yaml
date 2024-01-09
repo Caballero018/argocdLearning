@@ -1,41 +1,18 @@
-apiVersion: argoproj.io/v1alpha1
-kind: Application
-metadata:
-  name: my-app
-spec:
-  destination:
-    server: 'https://kubernetes.default.svc'
-    namespace: default
-  source:
-    repoURL: 'https://github.com/tu-usuario/tu-repo'
-    path: 'ruta-a-tu-codigo'
-    targetRevision: 'main'
-  project: default
-  syncPolicy:
-    automated:
-      prune: true
-      selfHeal: true
-  sourceType: 'Git'
-  podSpecPatch: |-
-    spec:
-      template:
-        spec:
-          containers:
-          - name: my-job
-            image: tu-usuario/tu-imagen-del-trabajo:etiqueta
-            command: ["/bin/sh"]
-            args: ["-c", "echo 'Ejecutando trabajo' && sleep 3600"]
----
-apiVersion: batch/v1
-kind: Job
-metadata:
-  name: my-job
-spec:
-  template:
-    spec:
-      containers:
-      - name: my-job
-        image: tu-usuario/tu-imagen-del-trabajo:etiqueta
-        command: ["/bin/sh"]
-        args: ["-c", "echo 'Ejecutando trabajo' && sleep 3600"]
-  backoffLimit: 4
+ apiVersion: argoproj.io/v1alpha1
+ kind: Application
+ metadata:
+   name: standalone-job
+ spec:
+   destination:
+     name: 'apliccations'
+     namespace: default
+     server: 'https://kubernetes.default.svc'
+   source:
+     path: standalone-job
+     repoURL: 'https://github.com/infracloudio/kubernetes-job-with-argocd'
+     targetRevision: HEAD
+   sources: []
+   project: default
+   syncPolicy:
+     syncOptions:
+     - Replace=true
