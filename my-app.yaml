@@ -1,0 +1,27 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: my-app
+spec:
+  destination:
+    server: 'https://kubernetes.default.svc'
+    namespace: default
+  source:
+    repoURL: 'https://github.com/Caballero018/argocdLearning.git'
+    path: '.'
+    targetRevision: 'main'
+  project: default
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+  sourceType: 'Git'
+  podSpecPatch: |-   
+    spec:
+      template:
+        spec:
+          containers:
+          - name: my-job
+            image: alpine:latest
+            command: ["/bin/sh"]
+            args: ["-c", "echo 'Ejecutando trabajo' && sleep 3600"]
