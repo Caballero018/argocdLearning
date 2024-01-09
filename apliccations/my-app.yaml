@@ -8,7 +8,7 @@ spec:
     namespace: default
   source:
     repoURL: 'https://github.com/Caballero018/argocdLearning.git'
-    path: '.'
+    path: 'apliccations'
     targetRevision: 'main'
   project: default
   syncPolicy:
