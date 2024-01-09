@@ -13,6 +13,7 @@ spec:
           image: alpine:latest
           command: ["sleep", "5"]
       restartPolicy: Never
+
 ---
 apiVersion: apps/v1
 kind: ReplicaSet
@@ -31,6 +32,7 @@ spec:
       containers:
         - name: main
           image: nginx:latest
+
 ---
 apiVersion: v1
 kind: Service
@@ -43,6 +45,7 @@ spec:
     - protocol: TCP
       port: 8080
       targetPort: 8080
+
 ---
 apiVersion: batch/v1
 kind: Job
@@ -61,6 +64,7 @@ spec:
           command: ["sleep", "2"]
       restartPolicy: Never
   backoffLimit: 0
+
 ---
 apiVersion: apps/v1
 kind: ReplicaSet
@@ -81,6 +85,7 @@ spec:
       containers:
         - name: main
           image: nginx:latest
+
 ---
 apiVersion: v1
 kind: Service
@@ -95,6 +100,7 @@ spec:
     - protocol: TCP
       port: 80
       targetPort: 80
+
 ---
 apiVersion: batch/v1
 kind: Job
