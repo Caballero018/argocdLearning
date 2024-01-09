@@ -1,6 +1,7 @@
 apiVersion: batch/v1
 kind: Job
 metadata:
+  name: my-app
   generateName: my-app
   annotations:
     argocd.argoproj.io/hook: PostSync
