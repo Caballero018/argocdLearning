@@ -5,12 +5,12 @@ metadata:
 spec:
   destination:
     server: 'https://kubernetes.default.svc'
-    namespace: testing
+    namespace: default
   source:
     repoURL: 'https://github.com/Caballero018/argocdLearning.git'
     path: 'apliccations'
     targetRevision: 'main'
-  project: default
+  project: testing
   syncPolicy:
     automated:
       prune: true
