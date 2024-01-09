@@ -7,8 +7,8 @@ spec:
     server: 'https://kubernetes.default.svc'
     namespace: default
   source:
-    repoURL: 'https://github.com/Caballero018/argocdLearning.git'
-    path: 'apliccations'
+    repoURL: 'https://github.com/tu-usuario/tu-repo'
+    path: 'ruta-a-tu-codigo'
     targetRevision: 'main'
   project: default
   syncPolicy:
@@ -16,12 +16,26 @@ spec:
       prune: true
       selfHeal: true
   sourceType: 'Git'
-  podSpecPatch: |-   
+  podSpecPatch: |-
     spec:
       template:
         spec:
           containers:
           - name: my-job
-            image: alpine:latest
+            image: tu-usuario/tu-imagen-del-trabajo:etiqueta
             command: ["/bin/sh"]
             args: ["-c", "echo 'Ejecutando trabajo' && sleep 3600"]
+---
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: my-job
+spec:
+  template:
+    spec:
+      containers:
+      - name: my-job
+        image: tu-usuario/tu-imagen-del-trabajo:etiqueta
+        command: ["/bin/sh"]
+        args: ["-c", "echo 'Ejecutando trabajo' && sleep 3600"]
+  backoffLimit: 4
